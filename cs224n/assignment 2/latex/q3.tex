@@ -26,20 +26,36 @@ On each step, your parser will decide among the three transitions using a neural
     \includegraphics[width=0.8\textwidth]{example.png} \\
     %\end{center}
 
-    \begin{adjustwidth}{-2cm}{}
+    \begin{adjustwidth}{-3.5cm}{}
     \begin{tabular}{ l | l | l | l}
     Stack & Buffer & New dependency & Transition \\ \hline
-    [ROOT] & [I, presented, my, findings, at, the, NLP, conference] &  & Initial Configuration \\
-    $[$ROOT, I] & [presented, my, findings, at, the, NLP, conference] &  &  \texttt{SHIFT}  \\
-    $[$ROOT, I, presented] & [my, findings, at, the, NLP, conference] &  &  \texttt{SHIFT}  \\
-    $[$ROOT, presented] & [my, findings, at, the, NLP, conference] & presented$\to$I &  \texttt{LEFT-ARC}  \\
+    [ROOT] & [I, presented, my, findings, at, the, NLP, con] &  & Initial Configuration \\
+    $[$ROOT, I] & [presented, my, findings, at, the, NLP, con] &  &  \texttt{SHIFT}  \\
+    $[$ROOT, I, presented] & [my, findings, at, the, NLP, con] &  &  \texttt{SHIFT}  \\
+    $[$ROOT, presented] & [my, findings, at, the, NLP, con] & presented$\to$I &  \texttt{LEFT-ARC}  \\
+    $[$ROOT, presented, my] & [findings, at, the, NLP, con] & & \texttt{SHIFT} \\
+    $[$ROOT, presented, my, findings] & [at, the, NLP, con] & & \texttt{SHIFT} \\
+    $[$ROOT, presented, findings] & [at, the, NLP, con] & findings$\to$my & \texttt{LEFT-ARC} \\
+    $[$ROOT, presented] & [at, the, NLP, con] & presented$\to$findings & \texttt{RIGHT-ARC} \\
+    $[$ROOT, presented, at] & [the, NLP, con] & & \texttt{SHIFT} \\
+    $[$ROOT, presented, at, the] & [NLP, con] &  & \texttt{SHIFT} \\
+    $[$ROOT, presented, at, the, NLP] & [con] &  & \texttt{SHIFT} \\
+    $[$ROOT, presented, at, the, NLP, con] & & & \texttt{SHIFT} \\
+    $[$ROOT, presented, at, the, con] & & con$\to$NLP & \texttt{LEFT-ARC} \\
+    $[$ROOT, presented, at, con] & & con$\to$the & \texttt{LEFT-ARC} \\
+    $[$ROOT, presented, con] & & con$\to$at & \texttt{LEFT-ARC} \\
+    $[$ROOT, presented] & & presented$\to$con & \texttt{LEFT-RIGHT} \\
+    $[$ROOT] & & ROOT$\to$presented & \texttt{LEFT-RIGHT}
     \end{tabular}\newline
     \end{adjustwidth}
     
     \part[2] A sentence containing $n$ words will be parsed in how many steps (in terms of $n$)? Briefly explain in 1--2 sentences why.
 
-       
-    
+    \ifans{
+        \newline SHIFT into stack: n and LEFTARC or RIGHTARC: n
+        \newline The number of steps: 2n
+    }
+
     \part[6] Implement the \texttt{\_\_init\_\_} and \texttt{parse\_step} functions in the \texttt{PartialParse} class in \texttt{parser\_transitions.py}. This implements the transition mechanics your parser will use. You can run basic (non-exhaustive) tests by running \texttt{python parser\_transitions.py part\_c}.
 
     \part[8] Our network will predict which transition should be applied next to a partial parse. We could use it to parse a single sentence by applying predicted transitions until the parse is complete. However, neural networks run much more efficiently when making predictions about \textit{batches} of data at a time (i.e., predicting the next transition for any different partial parses simultaneously). We can parse sentences in minibatches with the following algorithm. \newline
@@ -95,11 +111,17 @@ On each step, your parser will decide among the three transitions using a neural
     \begin{enumerate}[label=\roman*.]
     
         \item \textcolor{black}{Compute the derivative of $\bh = \relu(\bx \bW + \bb_1)$ with respect to $\bx$. For simplicity, you only need to show the derivative $\frac{\partial h_i}{\partial x_j}$ for some index $i$ and $j$. You may ignore the case where the derivative is not defined at 0.}
+        \newline \ifans{
+            $ \dfrac{\partial h_i}{\partial x_j} = \dfrac{\partial ReLU(x_i W + b_1)}{\partial x_j} = W $
+        }
         \item \textcolor{black}{Recall in part 1b, we computed the partial derivative of $\bJ_{\text{naive-softmax}}(\bv_c, o, \bU)$. Likewise, please compute the partial derivative of $J(\theta)$ with respect to the $i$th entry of $\bl$, which is denoted as $\bl_i$. Specifically, compute $\frac{\partial CE(\by, \byt)}{\partial \bl_i}$, assuming that $\bl \in \R^3$, $\byt \in \R^3$, $\by \in \R^3$, and the true label is $c$. \\
         \textbf{Hints}: You may recall from part 1a, $\frac{\partial CE(\by, \byt)}{\partial \bl_i} = \sum_j \frac{\partial CE(\by, \byt)}{\partial \byt_j}\frac{\partial \byt_j}{\partial \bl_i}$, and $\frac{\partial CE(\by, \byt)}{\partial \byt_j}=0$ if $j \neq c$. 
         }
+        \newline \ifans{
+            \newline $ \dfrac{CE(y, \hat{y})}{\partial l_i} = \sum_j \dfrac{\partial CE(y, \hat{y})}{\partial \hat{y}_j} \dfrac{\partial \hat{y}_j}{\partial l_i}$
+            \newline $ = \sum_j \dfrac{\partial -\sum^3_{j=1} y_j log(\hat{y}_j)}{\partial \hat{y}_j} \dfrac{\partial \hat{y_j}}{\partial l_i}   $
+        }
         \item We will use UAS score as our evaluation metric. UAS refers to Unlabeled Attachment Score, which is computed as the ratio between number of correctly predicted dependencies and the number of total dependencies despite of the relations (our model doesn't predict this).\newline
-    
    In \texttt{parser\_model.py} you will find skeleton code to implement this simple neural network using PyTorch. Complete the \texttt{\_\_init\_\_}, \texttt{embedding\_lookup} and \texttt{forward} functions to implement the model. Then complete the \texttt{train\_for\_epoch} and \texttt{train} functions within the \texttt{run.py} file.
    
     Finally execute \texttt{python run.py} to train your model and compute predictions
@@ -204,8 +226,36 @@ In particular, you \textbf{do not} need to look at the labels on the the depende
 \medskip
 
 \input{dep_parses.tex}
+\ifans{
+    \newline QUESTION I.
+    \begin{itemize}
+        \item \textbf{Error type}: Verb Phrase Attachment Error
+        \item \textbf{Incorrect dependency}: aquisition $\rightarrow$ citing
+        \item \textbf{Correct dependency}: blocked $\rightarrow$ citing
+    \end{itemize}
 
+    QUESTION II.
+    \begin{itemize}
+        \item \textbf{Error type}: Modifier Attachment Error
+        \item \textbf{Incorrect dependency}: elements $\rightarrow$ most
+        \item \textbf{Correct dependency}: crucial $\rightarrow$ most
+    \end{itemize}
+
+    QUESTION III.
+    \begin{itemize}
+        \item \textbf{Error type}: Prepositional Phrase Attachment Error
+        \item \textbf{Incorrect dependency}: Canada $\rightarrow$ Investment
+        \item \textbf{Correct dependency}: declined $\rightarrow$ Investment
+    \end{itemize}
+
+    QUESTION IV.
+    \begin{itemize}
+        \item \textbf{Error type}: Coordination Attachment Error
+        \item \textbf{Incorrect dependency}: affects $\rightarrow$ one
+        \item \textbf{Correct dependency}: plants $\rightarrow$ one
+    \end{itemize}
+}
 
 \part[2] Recall in part (e), the parser uses features which includes words and their part-of-speech (POS) tags. Explain the benefit of using part-of-speech tags as features in the parser?
-
+\newline \ifans{ \newline It can help the model identify the function of each word in the sentence and calculate the probability when predicting. }
 \end{parts}

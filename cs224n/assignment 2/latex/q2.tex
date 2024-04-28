@@ -20,7 +20,7 @@
                 where $\beta_1$ is a hyperparameter between 0 and 1 (often set to  0.9). Briefly explain in 2--4 sentences (you don't need to prove mathematically, just give an intuition) how using $\bm$ stops the updates from varying as much and why this low variance may be helpful to learning, overall.\newline
               
                 \ifans{
-                    \newline m (controlled by parameter \( \beta_1 \)) will adjust the next $ \theta $ by the previous one to make sure that each jump is not too drastic. This implementation also averages out updates, reducing their variance.
+                    \newline The momentum m (controlled by parameter \( \beta_1 \)) smooths the update rate. It helps pointing the gradients toward the long term minima.
                 }   
                 
             \subpart[2] Adam extends the idea of {\it momentum} with the trick of {\it adaptive learning rates} by keeping track of  $\bv$, a rolling average of the magnitudes of the gradients:
@@ -32,7 +32,7 @@
                 where $\odot$ and $/$ denote elementwise multiplication and division (so $\bz \odot \bz$ is elementwise squaring) and $\beta_2$ is a hyperparameter between 0 and 1 (often set to  0.99). Since Adam divides the update by $\sqrt{\bv}$, which of the model parameters will get larger updates?  Why might this help with learning?
                 
                 \ifans{
-                    \newline Parameters with smaller gradient will receive relatively larger updates. This can be beneficial to escape local minimum.
+                    \newline Adam normalizes each parameters update (reducing high gradients, increasing low gradients) via elementwise multiplication. This keeps the learning rate consistence and increases convergence speed. 
                 }
                 
                 \end{subparts}
@@ -57,8 +57,8 @@
           \subpart[2] Why should dropout be applied during training? Why should dropout \textbf{NOT} be applied during evaluation? \textbf{Hint:} it may help to look at the dropout paper linked. \newline
           
             \ifans{
-                \newline QUESTION I. $ \gamma $  should be equal because the model needs to randomly set units in the hidden layer h.
-                \newline QUESTION II. Dropout should be applied during training to avoid overfitting. While it's a bad idea to apply it in evaluation since it will destroy ebstablished layers connection.
+                \newline QUESTION I. $ \gamma = \dfrac{1}{p_{drop}} $. If we turn off $ p_{drop} $ neurons we need to offset those values by scaling the other neurons to maintain the network.
+                \newline QUESTION II. Dropout can be applied during training to avoid overfitting. While it's a bad idea to apply it in evaluation since it will simply break the well-trained model.
             }
         \end{subparts}
 
