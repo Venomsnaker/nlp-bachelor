@@ -59,6 +59,7 @@ class PartialParse(object):
         elif transition == "LA":
             self.dependencies.append((self.stack[-1], self.stack.pop(-2)))
         else:
+            # RA
             self.dependencies.append((self.stack[-2], self.stack.pop(-1)))
         ### END YOUR CODE
 
@@ -118,8 +119,8 @@ def minibatch_parse(sentences, model, batch_size):
         transitions = model.predict(batch)
         for ind, transition in enumerate(transitions):
             batch[ind].parse_step(transition)
-            if len(batch[i].buffer) == 0 and len(batch[i].stack) == 1:
-                unfinished_parses.remove(batch[i])
+            if len(batch[ind].buffer) == 0 and len(batch[ind].stack) == 1:
+                unfinished_parses.remove(batch[ind])
     dependencies = [pp.dependencies for pp in partial_parses]
     ### END YOUR CODE
 

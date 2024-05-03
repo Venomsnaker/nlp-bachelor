@@ -153,7 +153,7 @@ class ParserModel(nn.Module):
         ###     ReLU: https://pytorch.org/docs/stable/nn.html?highlight=relu#torch.nn.functional.relu
 
         x = torch.matmul(self.embedding_lookup(w), self.embed_to_hidden_weight) + self.embed_to_hidden_bias
-        x = self.dropout(F.ReLU(x))
+        x = self.dropout(F.relu(x))
         logits = torch.matmul(x, self.hidden_to_logits_weight) + self.hidden_to_logits_bias
         ### END YOUR CODE
         return logits

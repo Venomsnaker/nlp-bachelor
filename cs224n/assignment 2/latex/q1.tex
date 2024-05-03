@@ -53,8 +53,8 @@ Prove that the naive-softmax loss (Equation \ref{naive-softmax}) is the same as 
     \[
         y_w = 
         \begin{cases}
-            1 & w = 0\\
-            0 & w \neq 0
+            1 & w = o\\
+            0 & w \neq o
         \end{cases}
     \]    
     \( - \sum_{w \in Vocab} y_w log(\hat{y}_w) = -log(\hat{y}_o) - \sum_{w \in Vocab, \; w \neq o} {\sum} 0.log(\hat{y}_w) = -log(\hat{y}_o) \)
@@ -104,13 +104,16 @@ In many downstream applications using word embeddings, L2 normalized vectors (e.
 Compute the partial derivatives of $\bJ_{\text{naive-softmax}}(\bv_c, o, \bU)$ with respect to each of the `outside' word vectors, $\bu_w$'s. There will be two cases: when $w=o$, the true `outside' word vector, and $w \neq o$, for all other words. Please write your answer in terms of $\by$, $\hat{\by}$, and $\bv_c$. In this subpart, you may use specific elements within these terms as well (such as $\by_1$, $\by_2$, $\dots$). Note that $\bu_w$ is a vector while $\by_1, \by_2, \dots$ are scalars. Show your work to receive full credit.
 
 \ifans{
-    \newline \newline \( \dfrac{\partial J_{naive-softmax}(v_c, o, U)}{\partial U}
-    = \dfrac{\partial}{\partial U} [log(\sum_{w \in Vocab}exp(u_w^T v_c)) - u_o^T v_c] \)
-    \newline \( = \dfrac{1}{\sum_{w \in Vocab} exp(u_w^T v_c)} \sum_{w \in Vocab} exp(u_w^T v_c) \dfrac{\partial u_w^T v_c}{\partial U} - \dfrac{\partial u_o^T v_c}{\partial U}  \)
-    \newline \( = \sum_{x \in Vocab} \dfrac{exp(u_x^T v_c)}{\sum_{u \in Vocab} exp(u_w^T v_c)} \dfrac{\partial u_w^T v_c}{\partial U} - \dfrac{\partial u_o^T v_c}{\partial U} \)
-    \newline \( = \sum_{w \in Vocab} \hat{y}_w \dfrac{\partial u_w^T v_c}{\partial U} - \dfrac{\partial u_o^T v_c}{\partial U} \)
-    \newline \( = v_c \hat{y}^T - v_c y^T\)
-    \newline \( = v_c (\hat{y} - y)^T \)
+    \newline \( \dfrac{\partial J_{naive-softmax}(v_c, o, U)}{\partial u_w}
+    = \dfrac{\partial}{\partial u_w} [log(\sum_{w \in Vocab}exp(u_w^T v_c)) - u_o^T v_c] \)
+    \newline \( = -y_w v_c + \dfrac{log \sum_{w \in Vocab} exp(u_w^T v_c) . v_c}{\sum_{w \in Vocab} exp(u_w^T v_c) v_c}\)
+    \newline \( = -y_w v_c + \hat{y}_w v_c\ = (\hat{y}_w - y_w)^T v_c \)
+    \newline where \( y_w = 
+        \begin{cases}
+            1 & w = o\\
+            0 & w \neq o
+        \end{cases}
+    \)
     }
 
 % Question 1-E
