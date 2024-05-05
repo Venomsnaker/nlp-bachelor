@@ -6,7 +6,7 @@
 
     \part[3] Look at the {\monofam{src.vocab}} file for some examples of phrases and words in the source language vocabulary. When encoding an input Mandarin Chinese sequence into ``pieces'' in the vocabulary, the tokenizer maps the sequence to a series of vocabulary items, each consisting of one or more characters (thanks to the {\monofam{sentencepiece}} tokenizer, we can perform this segmentation even when the original text has no white space). Given this information, how could adding a 1D Convolutional layer after the embedding layer and before passing the embeddings into the bidirectional encoder help our NMT system? \textbf{Hint:} each Mandarin Chinese character is either an entire word or a morpheme in a word. Look up the meanings of 电, 脑, and 电脑 separately for an example. The characters 电 (electricity) and  脑 (brain) when combined into the phrase 电脑 mean computer.
 
-
+    ANSWERS: This allow the model to capture local dependencies and patterns among the character sequences. Each character is either a word or a morpheme in a word, so the convolutional layer could learn the patterns and predict new words.
 
 
     \part[8] Here we present a series of errors we found in the outputs of our NMT model (which is the same as the one you just trained). For each example of a reference (i.e., `gold') English translation, and NMT (i.e., `model') English translation, please:
@@ -25,28 +25,28 @@
         \textbf{Reference Translation:} \textit{\underline{the culprits were} subsequently arrested and convicted.}\newline
         \textbf{NMT Translation:} \textit{\underline{the culprit was} subsequently arrested and sentenced to theft.}
         
-        
+        ANSWERS: The model misstranslates singular vs plural form. Increase the vartiety between singular and plural nouns in the training data.
 
         \subpart[2]
         \textbf{Source Sentence}: 几乎已经没有地方容纳这些人,资源已经用尽。\newline
         \textbf{Reference Translation}: \textit{there is almost no space to accommodate these people, and resources have run out.   }\newline
         \textbf{NMT Translation}: \textit{the resources have been exhausted and \underline{resources have been exhausted}.}
         
-        
+        ANSWERS: The model misses the meaning of "space". Adjust the attention mechanism to better fit the language.
 
         \subpart[2]
         \textbf{Source Sentence}: 当局已经宣布今天是国殇日。 \newline
         \textbf{Reference Translation}: \textit{authorities have announced \underline{a national mourning today.}}\newline
         \textbf{NMT Translation}: \textit{the administration has announced \underline{today's day.}}
         
-        
+        ANSWERS: The model misstranslates because it doesn't fully capture the culture specific terms. Adjust the training data for more diverse culture aspects.
         
         \subpart[2] 
         \textbf{Source Sentence\footnote{This is a Cantonese sentence! The data used in this assignment comes from GALE Phase 3, which is a compilation of news written in simplified Chinese from various sources scraped from the internet along with their translations. For more details, see \url{https://catalog.ldc.upenn.edu/LDC2017T02}. }:} 俗语有云:``唔做唔错"。\newline
         \textbf{Reference Translation:} \textit{\underline{`` act not, err not "}, so a saying goes.}\newline
         \textbf{NMT Translation:} \textit{as the saying goes, \underline{`` it's not wrong. "}}
         
-        
+        ANSWERS: The model misss half of the meaning of the original sentence due to its being a Chinese idioms. Increase the training dataset for grammar structure in the original language. 
     \end{subparts}
 
 
@@ -86,22 +86,22 @@
         
         Please compute the BLEU scores for $\bc_1$ and $\bc_2$. Let $\lambda_i=0.5$ for $i\in\{1,2\}$ and $\lambda_i=0$ for $i\in\{3,4\}$ (\textbf{this means we ignore 3-grams and 4-grams}, i.e., don't compute $p_3$ or $p_4$). When computing BLEU scores, show your work (i.e., show your computed values for $p_1$, $p_2$, $len(c)$, $len(r)$ and $BP$). Note that the BLEU scores can be expressed between 0 and 1 or between 0 and 100. The code is using the 0 to 100 scale while in this question we are using the \textbf{0 to 1} scale. Please round your responses to 3 decimal places. 
         \newline
-        
         Which of the two NMT translations is considered the better translation according to the BLEU Score? Do you agree that it is the better translation?
         
+        ANSWERS: BLEU c1 = 0.408; BLEU c2 = 0.632 - c2 is the better translation according to BLEU score, but I dissagre due to wrongful grammar.
         
         
         \subpart[5] Our hard drive was corrupted and we lost Reference Translation $\br_1$. Please recompute BLEU scores for $\bc_1$ and $\bc_2$, this time with respect to $\br_2$ only. Which of the two NMT translations now receives the higher BLEU score? Do you agree that it is the better translation?
         
-        
+        ANSWERS: BLEU c1 = 0.408; BLEU c2 = 0.316 - c1 is the better translation.
         
         \subpart[2] Due to data availability, NMT systems are often evaluated with respect to only a single reference translation. Please explain (in a few sentences) why this may be problematic. In your explanation, discuss how the BLEU score metric assesses the quality of NMT translations when there are multiple reference transitions versus a single reference translation.
         
-        
+        ANSWERS: A single translation for reference will not be able to capture multiple aspects of the original sentence, thus making evaluation wrongful. But with more references, the score will take into account the variability and diversity of the target language and reduce bias.
         
         \subpart[2] List two advantages and two disadvantages of BLEU, compared to human evaluation, as an evaluation metric for Machine Translation. 
         
-        
+        ANSWERS: BLEU provide an objective and "calculatable" measure for translation grading while being scalable for large sentences. Meanwhiles, it does not capture fluency, coherence, or expression of the original data and can assign high score to unfaithful translations. 
         
     \end{subparts}
 
