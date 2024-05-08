@@ -140,7 +140,9 @@ After setting up the cloud VM, you should turn it off while you work on the prog
     First explain (in around three sentences) what effect the masks have on the entire attention computation.
     Then explain (in one or two sentences) why it is necessary to use the masks in this way.
 
-    ANSWERS: The masks are used to exclude the padded elements from attention computation. This is done by setting the values of $e_t$ corresponding to those elements to -inf. This is done because the padded elements have no meaning and should not be attended to by the encoder.
+    \textcolor{Red}{The masks are used to exclude the padded elements from attention computation.
+    This is done by setting the values of $e_t$ corresponding to those elements to -inf. 
+    \newline It is necessary to use the masks in this way because the padded elements contribute no meanings and should not be attended to by the encoder.}
 \end{parts}
 
 Now it's time to get things running! As noted earlier, we recommend that you develop the code on your personal computer.  Confirm that you are running in the proper conda environment and then execute the following command to train the model on your local machine:
@@ -195,7 +197,8 @@ sh run.sh test
     \subpart[2] Explain one advantage and one disadvantage of \textit{dot product attention} compared to multiplicative attention.
     \subpart[2] Explain one advantage and one disadvantage of \textit{additive attention} compared to multiplicative attention.
     \end{subparts}
-            
-    ANSWER: Dot Product Attention - more computational efficient but does not allow learning from multiple weights (limit in capturing patterns). On the opposite side, Additive Attention - learn weights for different set of weights but is more expensive to use.
-
+    \textcolor{Red} {
+        Dot Product Attention: more computational efficient but does not allow learning from multiple weights (limit in capturing patterns).
+        \newline Additive Attention: learn weights for different set of weights but is more expensive to use.
+    }
 \end{parts}
