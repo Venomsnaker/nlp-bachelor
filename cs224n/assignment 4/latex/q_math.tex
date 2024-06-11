@@ -48,9 +48,9 @@ Assume that (1) all key vectors are orthogonal, so $k_i^\top k_j = 0$ for all $i
 \ifans{
     \newline $ c \approx \dfrac{1}{2}(v_a + v_b) \Rightarrow \alpha_a = \alpha_b = \dfrac{1}{2} $
     \newline This means: $ k_a^T q = k_b^T q \gg k_i^T q \; \forall i \neq a, b $
-    \newline With $ k_a^T q = k_b^T q = \beta, \; \alpha_i \approx \dfrac{exp(\beta)}{2exp(\beta)} $
-    \newline For $ \beta \gg 0 \Rightarrow exp(\beta) \to \infty \Rightarrow \alpha_i \approx \dfrac{exp(\beta)}{2 exp(\beta)} = \dfrac{1}{2} $
-    \newline So: $ q = 2\beta (k_a + k_b) $ with $ \beta \gg 0 $
+    \newline With $ k_a^T q = k_b^T q = \beta, \; \alpha_a = \alpha_b \approx \dfrac{exp(\beta)}{2exp(\beta)} $
+    \newline For $ \beta \gg 0 \Rightarrow exp(\beta) \to \infty \Rightarrow \alpha_a = \alpha_b \approx \dfrac{exp(\beta)}{2 exp(\beta)} = \dfrac{1}{2} $
+    \newline So: $ q = 2\beta (k_a + k_b) \approx \beta (k_a + k_b)$ with $ \beta \gg 0 $
     }
 
 \part[5]\textbf{Drawbacks of single-headed attention:} \label{q_problem_with_single_head}
@@ -67,7 +67,7 @@ Design a query $q$ in terms of the $\mu_i$ such that as before, $c\approx \frac{
 
 \ifans{
     \newline Since $ \alpha $ is vanishingly small, covariance matrices (diagonal) is vanishingly small also, and $ k_i \approx u_i $
-    \newline Besides that, we assume that the means $ \mu_i $ are all perpendicular; so the results is similar to solution 1.b.
+    \newline Besides that, we assume that the means $ \mu_i $ are all perpendicular; so the results is similar to solution (b).
 }
 
 \subpart[3] Though single-headed attention is resistant to small perturbations in the keys, some types of larger perturbations may pose a bigger issue. In some cases, one key vector $k_a$ may be larger or smaller in norm than the others, while still pointing in the same direction as $\mu_a$.\footnote{Unlike the original Transformer, newer Transformer models apply layer normalization before attention. In these pre-layernorm models, norms of keys cannot be too different which makes the situation in this question less likely to occur.}
@@ -83,7 +83,17 @@ As an example, let us consider a covariance for item $a$ as $\Sigma_a = \alpha I
 
 When you sample $\{k_1,\dots,k_n\}$ multiple times, and use the $q$ vector that you defined in part i., what do you expect the vector $c$ will look like qualitatively for different samples? Think about how it differs from part (i) and how $c$'s variance would be affected.
 
-\ifans{}
+\ifans{
+    \newline We have $ \mu_i^T \mu_i = 1 $ and $ \alpha $ is vanishingly small
+    $ \Rightarrow \sum_a = \alpha I + \dfrac{1}{2} (\mu_a \mu_a^T) \approx \dfrac{1}{2} \Rightarrow k_a \in [0.5 \mu_a, 1.5 \mu_a ]$
+    \newline So: $ k_a = \gamma \mu_a $ where $ \mu \backsim N(1, 0.5) $ and $ k_i = \mu_i, \; \forall i \neq a $
+    \newline We have: $ k_a^T q \approx \gamma \beta , \; \beta \gg 0 $, $ k_b^T q \approx \beta , \; \beta \gg 0 $, and $ k_i^T q \approx 0 $
+    \newline $ \alpha_a = \dfrac{exp(\gamma \beta)}{exp(\gamma \beta) + exp(\beta)} = \dfrac{1}{1+exp(\beta(1 - \gamma))} $
+    \newline $ \alpha_b = \dfrac{exp(\beta)}{exp(\gamma \beta) + exp(\beta)} = \dfrac{1}{1 + exp(\beta (\gamma - 1))} $
+    \newline With $ \gamma \to 0.5 $ and $ \beta \gg 0 $, : $\alpha_a \approx 0 $ while $\alpha_b \approx 1$
+    \newline With $ \gamma \to 1.5 $ and $ \beta \gg 0 $, : $\alpha_a \approx 1 $ while $\alpha_b \approx 0$
+    \newline Therefore: $c = v_b$ when $\gamma \to 0.5$ and $c = v_a$ when $\gamma \to 1.5 \; (\beta \gg 0)$
+}   
 \end{subparts}
 
 \part[3]\textbf{Benefits of multi-headed attention:} \label{q_multi_head}
@@ -100,18 +110,27 @@ Assume that the covariance matrices are $\Sigma_i=\alpha I$, for vanishingly sma
 Design $q_1$ and $q_2$ in terms of $\mu_i$ such that $c$ is approximately equal to $\frac{1}{2}(v_a+v_b)$. 
 Note that $q_1$ and $q_2$ should have different expressions.
 
-\ifans{}
+\ifans{
+    \newline If $c_1 = \dfrac{1}{2} (v_a + v_b) $ for $ q_1 = \beta (\mu_a + \mu_b)$ and $c_2 = \dfrac{1}{2} (v_a + v_b) $ for $ q_2 = \beta (\mu_a + \mu_b) $
+    \newline With $c = \dfrac{1}{2}(c_1 + c_2) = \dfrac{1}{2} (v_a + v_b) $
+}
 
 \subpart[2]
 Assume that the covariance matrices are $\Sigma_a=\alpha I + \frac{1}{2}(\mu_a\mu_a^\top)$ for vanishingly small $\alpha$, and $\Sigma_i=\alpha I$  for all $i \neq a$.
 Take the query vectors $q_1$ and $q_2$ that you designed in part i.
 What, qualitatively, do you expect the output $c$ to look like across different samples of the key vectors? Explain briefly in terms of variance in $c_1$ and $c_2$. You can ignore cases in which $k_a^\top q_i < 0$.
 
-\ifans{}
+\ifans{
+    \newline We chose $q = \beta (\mu_a + \mu_b):$
+    \newline $ c \approx \dfrac{1}{1 + exp(\beta(1 - \gamma))} v_a + \dfrac{1}{1 + exp(\beta(\gamma - 1))} v_b $ (similar conditions to c.ii)
+    \newline When including more attention heads, with $ \gamma \to 1 , \; c = \dfrac{1}{2} (v_a + v_b) $
+}
 \end{subparts}
 
 \part[1] Based on part~(\ref{q_multi_head}), briefly summarize how multi-headed attention overcomes the drawbacks of single-headed attention that you identified in part~(\ref{q_problem_with_single_head}).
 
-\ifans{}
+\ifans{
+    \newline By adding more attention heads, c won't oscillate as much between $v_a$ and $v_b$ as before since $\gamma$ is moving toward its mean 1.
+}
 
 \end{parts}
