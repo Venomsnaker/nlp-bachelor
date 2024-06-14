@@ -57,7 +57,7 @@ Prove that the naive-softmax loss (Equation \ref{naive-softmax}) is the same as 
             0 & w \neq o
         \end{cases}
     \]    
-    \( - \sum_{w \in Vocab} y_w log(\hat{y}_w) = -log(\hat{y}_o) - \sum_{w \in Vocab, \; w \neq o} {\sum} 0.log(\hat{y}_w) = -log(\hat{y}_o) \)
+    \( - \sum_{w \in Vocab} y_w log(\hat{y}_w) = -log(\hat{y}_o) - \sum_{w \in Vocab, \; w \neq o} {\sum} 0 (\hat{y}_w) = -log(\hat{y}_o) \)
 }
 % Question 1-B
 \part[6]
@@ -81,9 +81,8 @@ Prove that the naive-softmax loss (Equation \ref{naive-softmax}) is the same as 
     = \dfrac{\partial}{\partial v_c} [-log \dfrac{exp(u_o^T v_c)}{\sum_{w \in Vocab}exp(u_w^T v_c)}] \)
     \newline \( = \dfrac{\partial}{\partial v_c} [-log(exp(u_o^T v_c)) + log(\sum_{w \in Vocab}exp(u_w^T v_c))] \)
     \newline \( = \dfrac{\partial}{\partial v_c} [log(\sum_{w \in Vocab}exp(u_w^T v_c)) - u_o^T v_c] \)
-    \newline \( = \sum_{x \in Vocab} \dfrac{exp(u_x^T v_c).u_x }{\sum_{w \in Vocab} exp(u_w^T v_c)} - u_o\)
-    \newline \( = \sum_{x \in Vocab} P(O = x|C = c).u_x - u_o \)
-    \newline \( = U \hat{y} - U y\)
+    \newline \( = \sum_{x \in Vocab} \dfrac{exp(u_x^T v_c) u_x }{\sum_{w \in Vocab} exp(u_w^T v_c)} - u_o\)
+    \newline \( = \sum_{x \in Vocab} P(O = x|C = c)u_x - u_o \)
     \newline \( = U(\hat{y} - y) \)
     \newline QUESTION II. \( \hat{y} = y \) (The model can make perfect prediction on outside words o from center word c)
     \newline QUESTION III. Subtracting this graident from \(v_c\) help minimize the loss function. (negative partial derivative values point toward minima)
@@ -106,8 +105,8 @@ Compute the partial derivatives of $\bJ_{\text{naive-softmax}}(\bv_c, o, \bU)$ w
 \ifans{
     \newline \( \dfrac{\partial J_{naive-softmax}(v_c, o, U)}{\partial u_w}
     = \dfrac{\partial}{\partial u_w} [log(\sum_{w \in Vocab}exp(u_w^T v_c)) - u_o^T v_c] \)
-    \newline \( = -y_w v_c + \dfrac{log \sum_{w \in Vocab} exp(u_w^T v_c) . v_c}{\sum_{w \in Vocab} exp(u_w^T v_c) v_c}\)
-    \newline \( = -y_w v_c + \hat{y}_w v_c\ = (\hat{y}_w - y_w)^T v_c \)
+    \newline \( = -y_w v_c + \dfrac{ exp(u_w^T v_c) v_c}{\sum_{w \in Vocab} exp(u_w^T v_c)}\)
+    \newline \( = -y_w v_c + \hat{y}_w v_c\ = (\hat{y}_w - y_w) v_c \)
     \newline where \( y_w = 
         \begin{cases}
             1 & w = o\\

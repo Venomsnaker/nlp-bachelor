@@ -59,8 +59,6 @@
             \ifans{
                 \newline QUESTION I. 
                 $ \mathbb{E}_{p_{\text{drop}}}[\bh_\text{drop}] = \mathbb{E}_{p_{\text{drop}}}[\gamma \bd \odot \bh] = \gamma \mathbb{E}_{p_{\text{drop}}} [\bd] \odot \bh = \gamma (1 - p_{drop})\bh = \bh $
-                \newline 
-                $ \gamma = \dfrac{1}{1 - p_{drop}} $. If we turn off $ p_{drop} $ neurons we need to offset those values by scaling the other neurons to maintain the network.
                 \newline QUESTION II. Dropout can be applied during training to avoid overfitting. While it's a bad idea to apply it in evaluation since it will simply break the well-trained model.
             }
         \end{subparts}
