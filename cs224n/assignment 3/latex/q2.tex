@@ -6,7 +6,7 @@
 
     \part[3] Look at the {\monofam{src.vocab}} file for some examples of phrases and words in the source language vocabulary. When encoding an input Mandarin Chinese sequence into ``pieces'' in the vocabulary, the tokenizer maps the sequence to a series of vocabulary items, each consisting of one or more characters (thanks to the {\monofam{sentencepiece}} tokenizer, we can perform this segmentation even when the original text has no white space). Given this information, how could adding a 1D Convolutional layer after the embedding layer and before passing the embeddings into the bidirectional encoder help our NMT system? \textbf{Hint:} each Mandarin Chinese character is either an entire word or a morpheme in a word. Look up the meanings of 电, 脑, and 电脑 separately for an example. The characters 电 (electricity) and  脑 (brain) when combined into the phrase 电脑 mean computer.
     \textcolor{Red} {
-        This allows the model to capture local dependencies and patterns among the character sequences.
+        \newline This allows the model to capture local dependencies and patterns among the character sequences.
         Each character (in Chinese) is either a word or a morpheme in a word, so the convolutional layer can identify the information around the word to predict it.
         Using a convolutional layer like this will help with predicting word unseen previously in the dictionary.
     }
@@ -34,7 +34,7 @@
         \textbf{Reference Translation}: \textit{there is almost no space to accommodate these people, and resources have run out.   }\newline
         \textbf{NMT Translation}: \textit{the resources have been exhausted and \underline{resources have been exhausted}.}
         
-        \textcolor{Red} {The model misses the meaning of "space". Adjust the attention mechanism to better fit the language.}
+        \textcolor{Red} {The model duplicates the phrase "the resources have been exhausted". Adjust the mechanism to better fir the grammar.}
 
         \subpart[2]
         \textbf{Source Sentence}: 当局已经宣布今天是国殇日。 \newline

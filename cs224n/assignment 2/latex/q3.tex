@@ -112,13 +112,13 @@ On each step, your parser will decide among the three transitions using a neural
     
         \item \textcolor{black}{Compute the derivative of $\bh = \relu(\bx \bW + \bb_1)$ with respect to $\bx$. For simplicity, you only need to show the derivative $\frac{\partial h_i}{\partial x_j}$ for some index $i$ and $j$. You may ignore the case where the derivative is not defined at 0.}
         \newline \ifans{
-            $ \dfrac{\partial h_i}{\partial x_j} = \dfrac{\partial ReLU(x_i W + b_1)}{\partial x_j} = W $
+            $ \dfrac{\partial h_i}{\partial x_j}  = \dfrac{\partial ReLU(x_i W + b_1)}{\partial x_j} = \dfrac{\partial h_i}{\partial x_i}\dfrac{\partial x_i}{\partial x_j} = W $
         }
         \item \textcolor{black}{Recall in part 1b, we computed the partial derivative of $\bJ_{\text{naive-softmax}}(\bv_c, o, \bU)$. Likewise, please compute the partial derivative of $J(\theta)$ with respect to the $i$th entry of $\bl$, which is denoted as $\bl_i$. Specifically, compute $\frac{\partial CE(\by, \byt)}{\partial \bl_i}$, assuming that $\bl \in \R^3$, $\byt \in \R^3$, $\by \in \R^3$, and the true label is $c$. \\
         \textbf{Hints}: You may recall from part 1a, $\frac{\partial CE(\by, \byt)}{\partial \bl_i} = \sum_j \frac{\partial CE(\by, \byt)}{\partial \byt_j}\frac{\partial \byt_j}{\partial \bl_i}$, and $\frac{\partial CE(\by, \byt)}{\partial \byt_j}=0$ if $j \neq c$. 
         }
         \newline \ifans{
-            \newline $ \dfrac{CE(y, \hat{y})}{\partial l_i} = \sum_j \dfrac{\partial CE(y, \hat{y})}{\partial \hat{y}_j} \dfrac{\partial \hat{y}_j}{\partial l_i}$
+            \newline $ \dfrac{\partial CE(y, \hat{y})}{\partial l_i} = \sum_j \dfrac{\partial CE(y, \hat{y})}{\partial \hat{y}_j} \dfrac{\partial \hat{y}_j}{\partial l_i}$
             \newline $ = \sum_j \dfrac{\partial -\sum^3_{j=1} y_j log(\hat{y}_j)}{\partial \hat{y}_j} \dfrac{\partial \hat{y_j}}{\partial l_i}   $
         }
         \item We will use UAS score as our evaluation metric. UAS refers to Unlabeled Attachment Score, which is computed as the ratio between number of correctly predicted dependencies and the number of total dependencies despite of the relations (our model doesn't predict this).\newline

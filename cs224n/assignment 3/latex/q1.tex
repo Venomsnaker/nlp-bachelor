@@ -139,9 +139,8 @@ After setting up the cloud VM, you should turn it off while you work on the prog
     
     First explain (in around three sentences) what effect the masks have on the entire attention computation.
     Then explain (in one or two sentences) why it is necessary to use the masks in this way.
-
     \textcolor{Red}{The masks are used to exclude the padded elements from attention computation.
-    This is done by setting the values of $e_t$ corresponding to those elements to -inf. 
+    This is done by setting the values of $e_t$ corresponding to those elements to $- \infty$. 
     \newline It is necessary to use the masks in this way because the padded elements contribute no meanings and should not be attended to by the encoder.}
 \end{parts}
 
@@ -199,6 +198,6 @@ sh run.sh test
     \end{subparts}
     \textcolor{Red} {
         Dot Product Attention: more computational efficient but does not allow learning from multiple weights (limit in capturing patterns).
-        \newline Additive Attention: learn weights for different set of weights but is more expensive to use.
+        \newline Additive Attention: learn weights for different set of weights but is more expensive to compute.
     }
 \end{parts}
