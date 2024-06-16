@@ -84,7 +84,7 @@ Prove that the naive-softmax loss (Equation \ref{naive-softmax}) is the same as 
     \newline \( = \sum_{x \in Vocab} \dfrac{exp(u_x^T v_c) u_w }{\sum_{w \in Vocab} exp(u_w^T v_c)} - u_o\)
     \newline \( = \sum_{x \in Vocab} P(O = x|C = c)u_w - u_o \)
     \newline $ = \E{[u_w]} - u_o $
-    \newline \( = U(\hat{y} - y) \)
+    \newline \( = U^T(\hat{y} - y) \)
     \newline QUESTION II. \( \hat{y} = y \) (The model can make perfect prediction on outside words o from center word c)
     \newline QUESTION III. Subtracting this graident from \(v_c\) help minimize the loss function. (negative partial derivative values point toward minima)
 }
@@ -104,24 +104,21 @@ In many downstream applications using word embeddings, L2 normalized vectors (e.
 Compute the partial derivatives of $\bJ_{\text{naive-softmax}}(\bv_c, o, \bU)$ with respect to each of the `outside' word vectors, $\bu_w$'s. There will be two cases: when $w=o$, the true `outside' word vector, and $w \neq o$, for all other words. Please write your answer in terms of $\by$, $\hat{\by}$, and $\bv_c$. In this subpart, you may use specific elements within these terms as well (such as $\by_1$, $\by_2$, $\dots$). Note that $\bu_w$ is a vector while $\by_1, \by_2, \dots$ are scalars. Show your work to receive full credit.
 
 \ifans{
-    \newline \( \dfrac{\partial J_{naive-softmax}(v_c, o, U)}{\partial u_w}
-    = \dfrac{\partial}{\partial u_w} [log(\sum_{w \in Vocab}exp(u_w^T v_c)) - u_o^T v_c] \)
-    \newline \( = \dfrac{ exp(u_w^T v_c) v_c}{\sum_{w \in Vocab} exp(u_w^T v_c)} - y_w v_c \)
-    \newline \( = \hat{y}_w v_c\ - y_w v_c = (\hat{y}_w - y_w) v_c \)
-    \newline where \( y_w = 
-        \begin{cases}
-            1 & w = o\\
-            0 & w \neq o
-        \end{cases}
-    \)
-    }
+    \newline $ \dfrac{\partial J_{naive-softmax}(v_c, o, U)}{\partial u_w} = \dfrac{\partial -log \dfrac{exp(u_o^T v_c)}{\sum_{w \in Vocab} exp(u_w^T v_c)}}{\partial u_w} $
+    \newline $ = -\dfrac{\partial log(exp(u_o^T v_c))}{\partial u_w} +\dfrac{\partial log \sum_{w \in Vocab} exp(u_w^T v_c)}{\partial u_w} $
+    \newline If $ w = 0 $:
+    \newline $ = -v_c + \dfrac{exp(u^T_w v_c) v_c}{\sum_{w \in Vocab} exp(u_w^T v_c)} = (P(O = o| C = c) - 1)v_c $
+    \newline If $ w \neq 0 $:
+    \newline $ = 0 + \dfrac{exp(u^T_w v_c) v_c}{\sum_{w \in Vocab} exp(u_w^T v_c)} = P(O = o| C = c) v_c $
+    \newline So: $ \dfrac{\partial J_{naive-softmax}(v_c, o, U)}{\partial u_w} = (\hat{y} - y)^T v_c $    
+}
 
 % Question 1-E
 \part[1]
 Write down the partial derivative of $\bJ_{\text{naive-softmax}}(\bv_c, o, \bU)$ with respect to $\bU$. Please break down your answer in terms of the column vectors $\frac{\partial \bJ(\bv_c, o, \bU)}{\partial \bu_1}$, $\frac{\partial \bJ(\bv_c, o, \bU)}{\partial \bu_2}$, $\cdots$, $\frac{\partial \bJ(\bv_c, o, \bU)}{\partial \bu_{|\text{Vocab}|}}$. No derivations are necessary, just an answer in the form of a matrix.
 
 \ifans {
-    \newline \( \dfrac{\partial J_{naive-softmax}(v_c, o, U)}{\partial u_w} = (\hat{y}_w - y_w) v_c \)
+    \newline \( \dfrac{\partial J_{naive-softmax}(v_c, o, U)}{\partial u_w} = (\hat{y} - y)^T v_c \)
     \newline Therefore: $ \dfrac{\partial J_{naive-softmax}(v_c, o, U)}{\partial U} $
     \newline \( = \begin{bmatrix} \hat{y}_1 v_c & \hat{y}_2 v_c & ... & \hat{y}_o v_c - v_c & ... & \hat{y}_{|Vocab|} v_c\end{bmatrix} \)
 
