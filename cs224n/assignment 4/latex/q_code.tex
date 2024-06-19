@@ -264,21 +264,29 @@ We'll score your model as to whether it gets at least 30\% accuracy on the test 
 
 \part[1] Succinctly explain why the pretrained (vanilla) model was able to achieve an accuracy of above 10\%, whereas the non-pretrained model was not.
 
-\ifans{}
+\ifans{
+        \newline The pre-trained model achieves an accuracy of $> 10 \% $ because it was trained on a large dataset previously.
+        \newline It has already learned the general features and patterns of the language so it can generate way better then a model training from scratch.
+}
 
 \part[2] Take a look at some of the correct predictions of the pretrain+finetuned vanilla model, as well as some of the errors.
 We think you'll find that it's impossible to tell, just looking at the output, whether the model \textit{retrieved} the correct birth place, or \textit{made up} an incorrect birth place.
 Consider the implications of this for user-facing systems that involve pretrained NLP components.
 Come up with two \textbf{distinct} reasons why this model behavior (i.e. unable to tell whether it's retrieved or made up) may cause concern for such applications, and an example for each reason.
 
-\ifans{}
+\ifans{
+        \newline Misinformation: Since the model can't distinguish between real and fabricated information, this can lead to the model confidently producing false information. A possible source of this problem is the model knowledge based purely on the train data, susceptible to bias.
+        \newline Legal and Ethical Issues: If the original training data contain biases in sensitive issues (race, law, religion, etc), the model can retain these bias and produce harmful results.
+}
 
 \part[2] If your model didn't see a person's name at pretraining time, and that person was not seen at fine-tuning time either, it is not possible for it to have ``learned'' where they lived.
 Yet, your model will produce \textit{something} as a predicted birth place for that person's name if asked.
 Concisely describe a strategy your model might take for predicting a birth place for that person's name, and one ethical concern this raises for the use of such applications.\\
 (While 4b discussed the problems that could arise from made up predictions, 4c asks for a mechanism the model could be using for generating birth places of people not seen at fine-tuning time and why such a mechanism could be problematic.)
 
-\ifans{}
+\ifans{
+        The model associates information via patterns during the training process. Since the model will use patterns to predict, it can lower the performance of the model and instill prejudices. 
+}
 
 \end{parts}
 

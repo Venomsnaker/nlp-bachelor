@@ -85,8 +85,8 @@ Prove that the naive-softmax loss (Equation \ref{naive-softmax}) is the same as 
     \newline \( = \sum_{x \in Vocab} P(O = x|C = c)u_w - u_o \)
     \newline $ = \E{[u_w]} - u_o $
     \newline \( = U^T(\hat{y} - y) \)
-    \newline QUESTION II. \( \hat{y} = y \) (The model can make perfect prediction on outside words o from center word c)
-    \newline QUESTION III. Subtracting this graident from \(v_c\) help minimize the loss function. (negative partial derivative values point toward minima)
+    \newline QUESTION II. \( \hat{y} = y \) (The model can make perfect predictions on outside words o from center word c)
+    \newline QUESTION III. Subtracting this gradient from \(v_c\) helps minimize the loss function. (negative partial derivative values point toward minima)
 }
 
 % Question 1-C
@@ -96,7 +96,7 @@ In many downstream applications using word embeddings, L2 normalized vectors (e.
 
 \ifans{
     \newline In the case of a word2vec model, L2 normalization will not affect the performance of a model with large word vector dimension much.
-    \newline Meanwhiles, models with smaller word vector dimension will be affected heavily. Since this usage of L2 normalized vectors will smooth out severely U.  
+    \newline Meanwhile, models with smaller word vector dimensios will be affected heavily. Since this usage of L2 normalized vectors will smooth out severely U.  
 }
 
 % Question 1-D

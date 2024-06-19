@@ -20,7 +20,7 @@
                 where $\beta_1$ is a hyperparameter between 0 and 1 (often set to  0.9). Briefly explain in 2--4 sentences (you don't need to prove mathematically, just give an intuition) how using $\bm$ stops the updates from varying as much and why this low variance may be helpful to learning, overall.\newline
               
                 \ifans{
-                    \newline The momentum m (controlled by parameter \( \beta_1 \)) acts as an average that smooths the update rate. It helps pointing the gradients toward the long term minima, avoiding local minimas and addressing noisy oscillations.
+                    \newline The momentum m (controlled by parameter \( \beta_1 \)) acts as an average that smooths the update rate. It helps points the gradients toward the long-term minima, avoiding local minima and addressing noisy oscillations.
                 }   
                 
             \subpart[2] Adam extends the idea of {\it momentum} with the trick of {\it adaptive learning rates} by keeping track of  $\bv$, a rolling average of the magnitudes of the gradients:
@@ -32,7 +32,7 @@
                 where $\odot$ and $/$ denote elementwise multiplication and division (so $\bz \odot \bz$ is elementwise squaring) and $\beta_2$ is a hyperparameter between 0 and 1 (often set to  0.99). Since Adam divides the update by $\sqrt{\bv}$, which of the model parameters will get larger updates?  Why might this help with learning?
                 
                 \ifans{
-                    \newline Adam normalizes each parameters update (reducing high gradients, increasing low gradients) via elementwise multiplication. This keeps the learning rate consistence and increases convergence speed. 
+                    \newline Adam normalizes each parameter update (reducing high gradients, increasing low gradients) via elementwise multiplication. This keeps the learning rate consistent and increases convergence speed. 
                 }
                 
                 \end{subparts}
