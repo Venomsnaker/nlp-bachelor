@@ -27,18 +27,7 @@ def layout_analysis(filenames: str) -> List[Document]:
     layout_analysis_loader = UpstageLayoutAnalysisLoader(filenames, split="element")
     return layout_analysis_loader.load()
 
-filenames = [
-    "data/CS224n-Week1.pdf",
-    "data/CS224n-Week2.pdf",
-    "data/CS224n-Week3.pdf",
-    "data/CS224n-Week4.pdf",
-    "data/CS224n-Week5.pdf",
-    "data/CS224n-Week6.pdf",
-    "data/CS224n-Week7.pdf",
-    "data/CS224n-Week8.pdf",
-    "data/CS224n-Week9.pdf",
-    "data/CS224n-Week10.pdf",
-]
+filenames = []
 docs = layout_analysis(filenames)
 db: VectorStore = Chroma(
     embedding_function=UpstageEmbeddings(model="solar-embedding-1-large-passage")
