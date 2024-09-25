@@ -1,0 +1,222 @@
+[
+    {
+        "itemID": "item001",
+        "name": "Jeju Crayon",
+        "category": "souvenir",
+        "origin": "shop001",
+        "description": "ODUJEJ, a company creating objet using materials unique to Jeju, came up with this crayon set inspired by Jeju’s stone mounds. Jeju stones’ texture and colors were brought to life using Jeju beeswax and natural mineral pigments.",
+        "stock": 23,
+        "price": 22.55,
+        "pictures": ["https://i.ibb.co/cL4D0Rt/crayon.jpg"],
+        "discount": 0
+    },
+    {
+        "itemID": "item002",
+        "name": "Dol Hareubang Candle",
+        "category": "souvenir",
+        "origin": "shop001",
+        "description": "When lighting this candle, one feels as if they are back in Jeju. Dol Hareubang refers to stone sculptures erected outside government offices in Jeju in the old days. These stone sculptures stood as guardians of the island in the past, and now lend their appearances to souvenirs of Jeju.",
+        "stock": 45,
+        "price": 11.27,
+        "pictures": ["https://i.ibb.co/d277P6q/candle.jpg"],
+        "discount": 0.1
+    },
+    {
+        "itemID": "item003",
+        "name": "Mongdol Natural Soap",
+        "category": "souvenir",
+        "origin": "shop001",
+        "description": "This cute soap is formulated by experts with charcoal, seaweed extract, and other ingredients that are excellent for removing oil from the skin, without the use of artificial additives such as surfactants, artificial flavors, colors, and preservatives.",
+        "stock": 67,
+        "price": 7.52,
+        "pictures": ["https://i.ibb.co/j6Ydr62/soap.jpg"],
+        "discount": 0
+    },
+    {
+        "itemID": "item004",
+        "name": "Jeju Toothpaste",
+        "category": "souvenir",
+        "origin": "shop001",
+        "description": " The smooth and refreshing feel of 1950 Toothpaste products were developed with Jeju's native herbs, Jeju volcanic seawater, Jeju organic lemon, and tangerine peel.",
+        "stock": 34,
+        "price": 7.52,
+        "pictures": ["https://i.ibb.co/vJyM0Pk/toothpaste.jpg"],
+        "discount": 0.15
+    },
+    {
+        "itemID": "item005",
+        "name": "Jeju Tangerine Pencil",
+        "category": "souvenir",
+        "origin": "shop001",
+        "description": "You can feel the creators’ care in trying to preserve the beautiful nature of Jeju with these pencils, for they are upcycled from materials generated during tangerine farming. To create this tangerine peelbased pencil, many years of research in the service of sustainability were needed.",
+        "stock": 26,
+        "price": 7.52,
+        "pictures": ["https://i.ibb.co/jZz43QK/pencil.jpg"],
+        "discount": 0
+    },
+    {
+        "itemID": "item006",
+        "name": "Jeju Shirts, Trousers, and Dresses",
+        "category": "souvenir",
+        "origin": "shop002",
+        "description": "These products are made by the brand Scene of Jeju and Jeju farmers, using tangerines that cannot be sold on the market. Plus, they feel great against your body, using only natural fibers grown and produced without pesticides or chemical fertilizers. Their eco-friendly consciousness delivers the feeling of wearing Jeju’s pristine nature on one’s skin.",
+        "stock": 8,
+        "price": 60.00,
+        "pictures": ["https://i.ibb.co/j3c7m02/shirts.jpg"],
+        "discount": 0
+    },
+    {
+        "itemID": "item007",
+        "name": "Jeju Hat and Scarf",
+        "category": "souvenir",
+        "origin": "shop002",
+        "description": "“Muldeuryeon Massim” grows and harvests tangerines and other ingredients to create naturally dyed products like hats and scarves.",
+        "stock": 46,
+        "price": 26.30,
+        "pictures": ["https://i.ibb.co/NTX3Xt0/hat.jpg"],
+        "discount": 0.2
+    },
+    {
+        "itemID": "item008",
+        "name": "Jeju Eco Bag",
+        "category": "souvenir",
+        "origin": "shop002",
+        "description": "Among the various Haenyeo merch sold in the Haenyeo Museum shop, the eco bag stands out. It captures the feeling of Jeju with its Haenyeo illustration. The bag is soft and smooth, which, coupled with the cute Haenyeo illustration, cheers you up right away as you shoulder the bag.",
+        "stock": 98,
+        "price": 7.52,
+        "pictures": ["https://i.ibb.co/DkS1tHC/bag.jpg"],
+        "discount": 0.4
+    },
+    {
+        "itemID": "item009",
+        "name": "Jeju Pendant, Bracelet, and Brooch",
+        "category": "souvenir",
+        "origin": "shop002",
+        "description": "How can Haenyeo be so cute? “Sumbi Island,” a place known for its Haenyeo character offerings, is home to truly a staggering variety of Haenyeo products. Pendants, bracelets, and brooches, in particular, are popular for their cutesy Haenyeo character design. The design includes diving Haenyeo, Haenyeo holding a tewak, and even the dolphins of Jeju.",
+        "stock": 121,
+        "price": 3.76,
+        "pictures": ["https://i.ibb.co/j6sP0g0/pendant.jpg"],
+        "discount": 0.1
+    },
+    {
+        "itemID": "item010",
+        "name": "Tewak Handicraft",
+        "category": "souvenir",
+        "origin": "shop002",
+        "description": "Tewak is a must-have tool for divers. When diving underwater, Haenyeo place this equipment on their chest so that their body can float upward. Because of its importance as a life-saving gear, tewak takes on a symbolic importance to Haenyeo, who are, in turn, symbols of Jeju.",
+        "stock": 7,
+        "price": 15.03,
+        "pictures": ["https://i.ibb.co/nzddvH7/tewak.jpg"],
+        "discount": 0
+    },
+    {
+        "itemID": "item011",
+        "name": "Jeju Tangerine Hat",
+        "category": "souvenir",
+        "origin": "shop002",
+        "description": "When you are in Jeju, you often run into people wearing orange hats. These hats come with a stem, perfectly recreating tangerines and making them the most Jeju of all merch.",
+        "stock": 67,
+        "price": 7.52,
+        "pictures": ["https://i.ibb.co/5np20bR/hat.png"],
+        "discount": 0.15
+    },
+    {
+        "itemID": "item012",
+        "name": "Tangerine Drip Coffee",
+        "category": "food",
+        "origin": "shop003",
+        "description": "Tangerine drip coffee combines Brazilian and Guatemalan coffee beans with tangerines, and this creates a cup coffee front-ended by the deep flavors of the beans before being rounded out with the fragrance of tangerines.",
+        "stock": 78,
+        "price": 7.52,
+        "pictures": ["https://i.ibb.co/PZXmW0Q/coffee.png"],
+        "discount": 0.2
+    },
+    {
+        "itemID": "item013",
+        "name": "Tangerine Juice and Chips",
+        "category": "food",
+        "origin": "shop003",
+        "description": "Tangerine juice or tangerine chips offer a more interesting way to enjoy the flavors of Jeju tangerine. Most of the tangerine juice and tangerine chips sold in souvenir shops around Jeju are made from tangerine grown without pesticides and processed in a healthy way without additives.",
+        "stock": 69,
+        "price": 7.52,
+        "pictures": ["https://i.ibb.co/tXtS5Kv/juice.png"],
+        "discount": 0.5
+    },
+    {
+        "itemID": "item014",
+        "name": "Ramyeon",
+        "category": "food",
+        "origin": "shop003",
+        "description": "Surprisingly, this ramyeon is made with black pork. The broth captures the deep flavors of black pork, in which plump and chewy noodles swim as vehicles of that flavor. Don’t forget to add some cold rice to the soup after finishing the ramyeon. Cold rice soaks up all the good stuff from the broth, and before long, you will be staring into the base of the bowl.",
+        "stock": 24,
+        "price": 7.52,
+        "pictures": ["https://i.ibb.co/347Dnqf/ramyeon.png"],
+        "discount": 0.1
+    },
+    {
+        "itemID": "item015",
+        "name": "Black Pork Jerky",
+        "category": "food",
+        "origin": "shop003",
+        "description": "Black pork jerky is a worthy part of any gourmand trip in Jeju. It is sourced from Jeju black pigs grown with eco-friendly means, and the oak smoking process gives the jerky an excellent flavor and fragrance. What’s more, it is made according to traditional Korean methods, where the meat is first trimmed of fat, sliced thin, and spiced in soy sauce and other condiments.",
+        "stock": 43,
+        "price": 3.76,
+        "pictures": ["https://i.ibb.co/WcgvkjJ/jerky.png"],
+        "discount": 0
+    },
+    {
+        "itemID": "item016",
+        "name": "Hallasan Cookie",
+        "category": "food",
+        "origin": "shop004",
+        "description": "This cookie is made in the shape of the Hallasan Mountain, as seen from Seogwipo. It comes in four flavors, made with good ingredients like Udo Island’s peanuts, Hallabong, and Jeju matcha. Its resemblance to Hallasan Mountain makes it all the more delicious.",
+        "stock": 83,
+        "price": 11.27,
+        "pictures": ["https://i.ibb.co/n1zxvDd/cookie.png"],
+        "discount": 0
+    },
+    {
+        "itemID": "item017",
+        "name": "Hallsan Cream Bun",
+        "category": "food",
+        "origin": "shop004",
+        "description": "This bread looks like the Hallasan Mountain with a snow-capped peak. Its sumptuous appearance is positively inviting. There is quite a variety of flavors, from milk cream to vanilla, Udo Island’s peanuts, and organic matcha, so you have plenty of variety to choose from.",
+        "stock": 12,
+        "price": 11.27,
+        "pictures": ["https://i.ibb.co/J3RQBFH/cream.png"],
+        "discount": 0.05
+    },
+    {
+        "itemID": "item018",
+        "name": "Hallabong Tea",
+        "category": "food",
+        "origin": "shope004",
+        "description": "This product blends Hallabong fruits, which have been grown in Jeju’s pristine nature, with honey and other ingredients for both taste and health benefits. The flavor is sweet and tangy, while its rich vitamin content helps mitigate fatigue and prevent colds.",
+        "stock": 63,
+        "price": 5.26,
+        "pictures": ["https://i.ibb.co/1MTpXHg/tea.png"],
+        "discount": 0.1
+    },
+    {
+        "itemID": "item019",
+        "name": "Gosori and Omegi Liquor",
+        "category": "food",
+        "origin": "shop004",
+        "description": "Gosori Liquor is a distilled liquor made with millet grown in Jeju. This historic liquor is fruity, goes down smoothly, and gives way to deep flavors. Omegi Liquor, fermented from omegi (millet) rice cake, also impresses with its deep flavors.",
+        "stock": 75,
+        "price": 15.03,
+        "pictures": ["https://i.ibb.co/jyyGqZ1/gosori.png"],
+        "discount": 0
+    },
+    {
+        "itemID": "item020",
+        "name": "Cemallia Liquor",
+        "category": "food",
+        "origin": "shop004",
+        "description": "This liquor is fermented with red petals of camellia flowers in Jeju. It is fragrant with floral notes, tangy, and soft, with a beautiful, natural color.",
+        "stock": 63,
+        "price": 7.52,
+        "pictures": ["https://i.ibb.co/mNwfr2X/camellia.png"],
+        "discount": 0
+    }
+]
