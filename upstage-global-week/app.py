@@ -27,23 +27,25 @@ def layout_analysis(filenames: str) -> List[Document]:
     layout_analysis_loader = UpstageLayoutAnalysisLoader(filenames, split="element")
     return layout_analysis_loader.load()
 
-filenames = []
+filenames = [
+    'map.pdf',
+]
 docs = layout_analysis(filenames)
 db: VectorStore = Chroma(
     embedding_function=UpstageEmbeddings(model="solar-embedding-1-large-passage")
 )
 retriever = db.as_retriever()
-# db.add_documents(docs)
+db.add_documents(docs)
 
 # Set up the model and prompt
-template = """Answer the question based only on the given context.
+template = """Ensure the itinerary follows the context:
 {context}
 
 Question: {question}
 """
 
 prompt = ChatPromptTemplate.from_template(template)
-model = ChatUpstage()
+model = ChatUpstage("solar-pro")
 model_chain = prompt | model | StrOutputParser()
 
 # Set up the RAG system
@@ -118,7 +120,7 @@ interface = gr.Interface(
     fn=chat,
     inputs=[gr.Textbox(label="text", lines=2)],
     outputs='text',
-    title="Upstage Solar RAG Chatbot 0.2",
+    title="Solar Pro Itinerary Creator",
 )
 
 if __name__ == "__main__":
